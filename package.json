@@ -19,7 +19,7 @@
     "#dev-all": "Dev mode: watch for server changes and start UI server",
     "dev-all": "rm dist/* && npm run watch-server-hmr & sleep 5 && npm start",
     "heroku-postbuild": "npm run compile && ln -fs ../node_modules/bootstrap/dist
-    public/bootstrap"
+    public / bootstrap"
   },
   "author": "vasan.promern@gmail.com",
   "license": "ISC",
