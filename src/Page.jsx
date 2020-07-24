@@ -17,17 +17,17 @@ function NavBar({ user, onUserChange }) {
   return (
     <Navbar fluid>
       <Navbar.Header>
-        <Navbar.Brand>Issue Tracker</Navbar.Brand>
+        <Navbar.Brand>Good Fir You</Navbar.Brand>
       </Navbar.Header>
       <Nav>
         <LinkContainer exact to="/">
           <NavItem>Home</NavItem>
         </LinkContainer>
-        <LinkContainer to="/issues">
-          <NavItem>Issue List</NavItem>
+        <LinkContainer to="/profile">
+          <NavItem>Profile</NavItem>
         </LinkContainer>
-        <LinkContainer to="/report">
-          <NavItem>Report</NavItem>
+        <LinkContainer to="/login">
+          <NavItem>Sign Up</NavItem>
         </LinkContainer>
       </Nav>
       <Col sm={5}>
@@ -59,8 +59,12 @@ function Footer() {
       <p className="text-center">
         Full source code available at this
         {' '}
-        <a href="https://github.com/vasansr/pro-mern-stack-2">
-          Github repository
+        <a href="https://github.ccs.neu.edu/NEU-CS5610-SU20/GroupProject_GoodFirYou_UI">
+          Github UI repository
+        </a>
+        <br></br>
+        <a href="https://github.ccs.neu.edu/NEU-CS5610-SU20/GroupProject_GoodFirYou_API">
+          Github API repository
         </a>
       </p>
     </small>
