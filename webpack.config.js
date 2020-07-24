@@ -4,15 +4,16 @@ const webpack = require('webpack');
 
 const browserConfig = {
   mode: 'development',
-  entry: { app: ['./browser/App.jsx'] },
+  entry: {
+    app: ['./browser/App.jsx']
+  },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'public'),
     publicPath: '/',
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
@@ -33,6 +34,46 @@ const browserConfig = {
           },
         },
       },
+      {
+        // For pure CSS - /\.css$/i,
+        // For Sass/SCSS - /\.((c|sa|sc)ss)$/i,
+        // For Less - /\.((c|le)ss)$/i,
+        test: /\.((c|sa|sc)ss)$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              // Run `postcss-loader` on each CSS `@import`, do not forget that `sass-loader` compile non CSS `@import`'s into a single file
+              // If you need run `sass-loader` and `postcss-loader` on each CSS `@import` please set it to `2`
+              importLoaders: 1,
+              // Automatically enable css modules for files satisfying `/\.module\.\w+$/i` RegExp.
+              modules: {
+                auto: true
+              },
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [postcssPresetEnv({
+                stage: 0
+              })]
+            },
+          },
+          // Can be `less-loader`
+          {
+            loader: 'sass-loader',
+          },
+        ],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+        },
+      },
     ],
   },
   optimization: {
@@ -51,7 +92,9 @@ const browserConfig = {
 
 const serverConfig = {
   mode: 'development',
-  entry: { server: ['./server/uiserver.js'] },
+  entry: {
+    server: ['./server/uiserver.js']
+  },
   target: 'node',
   externals: [nodeExternals()],
   output: {
@@ -60,22 +103,22 @@ const serverConfig = {
     publicPath: '/',
   },
   module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ['@babel/preset-env', {
-                targets: { node: '10' },
-              }],
-              '@babel/preset-react',
-            ],
-          },
+    rules: [{
+      test: /\.jsx?$/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            ['@babel/preset-env', {
+              targets: {
+                node: '10'
+              },
+            }],
+            '@babel/preset-react',
+          ],
         },
       },
-    ],
+    }, ],
   },
   plugins: [
     new webpack.DefinePlugin({
