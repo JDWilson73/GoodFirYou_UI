@@ -30,6 +30,7 @@
     "http-proxy-middleware": "^0.21.0",
     "isomorphic-fetch": "^2.2.1",
     "nodemon": "^1.19.4",
+    "obj-traverse": "^1.0.0",
     "postcss-preset-env": "^6.7.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
