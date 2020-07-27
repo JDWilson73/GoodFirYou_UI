@@ -21,26 +21,28 @@ export default class EnhancedTree extends React.Component {
     const { data, height, width, svgProps, count } = this.state;
     const logTest = (e, node) => {
       e.preventDefault();
-      alert(`Spooooop ${node}`);
-
-      let obj = findFirst(data, 'children', { name: node });
-      if (!obj.children) {
-        obj.children = [{
-          name: `Test ${count}`,
-          textProps: {transform: 'rotate(90)'},
-        }];
-        this.setState({count: count + 1});
+      //alert(`Spooooop ${node}`);
+      const newBranch = prompt("Enter new branch:", "Massaging a Jigglypuff");
+      if (newBranch != null && newBranch != "") {
+        let obj = findFirst(data, 'children', { name: node });
+        if (!obj.children) {
+          obj.children = [{
+            name: `${newBranch}`,
+            textProps: {transform: 'rotate(90)'},
+          }];
+          //this.setState({count: count + 1});
+        }
+        else {
+          obj.children.push({
+            name: `${newBranch}`,
+            textProps: {transform: 'rotate(90)'},
+          });
+          //this.setState({count: count + 1});
+        }
+        console.log(obj);
+        console.log(data);
+        this.setState({data: data});
       }
-      else {
-        obj.children.push({
-          name: `Test ${count}`,
-          textProps: {transform: 'rotate(90)'},
-        });
-        this.setState({count: count + 1});
-      }
-      console.log(obj);
-      console.log(data);
-      this.setState({data: data});
     }
 
     return(
