@@ -1,5 +1,5 @@
 import React from 'react';
-import Tree from 'react-tree-graph';
+import EnhancedTree from './EnhancedTree.jsx';
 // import 'react-tree-graph/dist/style.css';
 
 let data = {
@@ -9,7 +9,7 @@ let data = {
     name: 'Something I want to be better at!',
     textProps: {transform: 'rotate(90)'},
     children: [{
-      name: 'Fighting crime',
+      name: "Fighting crime",//'Fighting crime',
       textProps: {transform: 'rotate(90)'},
     }, {
       name: 'Not killing my cacti',
@@ -34,19 +34,17 @@ let data = {
   }]
 };
 
+
 export default function LandingPage() {
   return (
-    <div className="custom-container">
-      <h1>Placeholder for the LandingPage</h1>
-      <Tree
-        data={data}
-        height={800}
-        width={800}
-        svgProps={{
-          className: 'custom',
-          transform: 'rotate(270)'
-        }}
-      />
-    </div>
+    <EnhancedTree
+      data={data}
+      height={800}
+      width={800}
+      svgProps={{
+        className: 'custom',
+        transform: 'rotate(270)'
+      }}
+    />
   )
 }
