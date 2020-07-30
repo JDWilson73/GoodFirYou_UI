@@ -1,14 +1,18 @@
 import React from 'react';
 import Tree from 'react-tree-graph';
 import { findFirst, findAndDeleteFirst } from 'obj-traverse/lib/obj-traverse';
-import { Modal } from 'react-bootstrap';
+
+import BranchMod from './BranchMod.jsx';
 
 export default class EnhancedTree extends React.Component {
-
   constructor(props) {
     super(props);
-    const { data, height, width, svgProps } = this.props;
-    this.state = { data, height, width, svgProps, addMode: true, buttonText: "Remove" };
+    const {
+      data, height, width, svgProps,
+    } = this.props;
+    this.state = {
+      data, height, width, svgProps, addMode: true, buttonText: 'Remove',
+    };
 
     this.addBranch = this.addBranch.bind(this);
     this.removeBranch = this.removeBranch.bind(this);
@@ -20,22 +24,21 @@ export default class EnhancedTree extends React.Component {
 
     e.preventDefault();
 
-    const newBranch = prompt("Enter new branch:", "Massaging a Jigglypuff");
-    if (newBranch != null && newBranch != "") {
-      let obj = findFirst(data, 'children', { name: node });
+    const newBranch = prompt('Enter new branch:', 'Massaging a Jigglypuff');
+    if (newBranch != null && newBranch != '') {
+      const obj = findFirst(data, 'children', { name: node });
       if (!obj.children) {
         obj.children = [{
           name: `${newBranch}`,
-          textProps: {transform: 'rotate(90)'},
+          textProps: { transform: 'rotate(90)' },
         }];
-      }
-      else {
+      } else {
         obj.children.push({
           name: `${newBranch}`,
-          textProps: {transform: 'rotate(90)'},
+          textProps: { transform: 'rotate(90)' },
         });
       }
-      this.setState({ data: data });
+      this.setState({ data });
     }
   }
 
@@ -44,20 +47,21 @@ export default class EnhancedTree extends React.Component {
 
     findAndDeleteFirst(data, 'children', { name: node });
 
-    this.setState({ data: data });
+    this.setState({ data });
   }
 
   changeMode() {
     if (this.state.addMode) {
-      this.setState({ addMode: false, buttonText: "Add" });
-    }
-    else {
-      this.setState({ addMode: true, buttonText: "Remove" });
+      this.setState({ addMode: false, buttonText: 'Add' });
+    } else {
+      this.setState({ addMode: true, buttonText: 'Remove' });
     }
   }
 
   render() {
-    const { data, height, width, svgProps, addMode, buttonText } = this.state;
+    const {
+      data, height, width, svgProps, addMode, buttonText,
+    } = this.state;
 
     return (
       <div className="custom-container">
@@ -69,13 +73,18 @@ export default class EnhancedTree extends React.Component {
           svgProps={svgProps}
           gProps={{
             className: 'node',
-            onClick: addMode ? this.addBranch : this.removeBranch
+            onClick: addMode ? this.addBranch : this.removeBranch,
           }}
         />
 
-        <button type = "button" onClick = {this.changeMode}>
-         Change to {buttonText} mode
+        <button type="button" onClick={this.changeMode}>
+          Change to
+          {' '}
+          {buttonText}
+          {' '}
+          mode
         </button>
+        <BranchMod />
       </div>
     );
   }
