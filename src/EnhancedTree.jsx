@@ -8,8 +8,6 @@ export default class EnhancedTree extends React.Component {
   constructor(props) {
     super(props);
     const { data, height, width, svgProps } = this.props;
-    console.log("lsjdfljsdflkjsdf");
-    console.log(data);
     this.state = { data, height, width, svgProps, addMode: true, buttonText: "Remove" };
 
     this.addBranch = this.addBranch.bind(this);
