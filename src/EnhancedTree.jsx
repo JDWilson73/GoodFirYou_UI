@@ -8,6 +8,8 @@ export default class EnhancedTree extends React.Component {
   constructor(props) {
     super(props);
     const { data, height, width, svgProps } = this.props;
+    console.log("lsjdfljsdflkjsdf");
+    console.log(data);
     this.state = { data, height, width, svgProps, addMode: true, buttonText: "Remove" };
 
     this.addBranch = this.addBranch.bind(this);
@@ -16,7 +18,7 @@ export default class EnhancedTree extends React.Component {
   }
 
   addBranch(e, node) {
-    const { data } = this.state;
+    const { data } = this.props;
 
     e.preventDefault();
 
@@ -40,7 +42,7 @@ export default class EnhancedTree extends React.Component {
   }
 
   removeBranch(e, node) {
-    const { data } = this.state;
+    const { data } = this.props;
 
     findAndDeleteFirst(data, 'children', { name: node });
 
@@ -57,11 +59,12 @@ export default class EnhancedTree extends React.Component {
   }
 
   render() {
-    const { data, height, width, svgProps, addMode, buttonText } = this.state;
-
+    const { /*data, */height, width, svgProps, addMode, buttonText } = this.state;
+    const { data } = this.props;
+    console.log("rendering in enhanced");
+    console.log(data);
     return (
       <div className="custom-container">
-        <h1>Placeholder for the LandingPage</h1>
         <Tree
           data={data}
           height={height}
