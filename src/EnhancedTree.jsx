@@ -17,14 +17,14 @@ export default class EnhancedTree extends React.Component {
     this.addBranch = this.addBranch.bind(this);
     this.removeBranch = this.removeBranch.bind(this);
     this.changeMode = this.changeMode.bind(this);
-    this.branchInfo = this.branchInfo.bind(this);
+    this.setBranchInfo = this.setBranchInfo.bind(this);
   }
 
-  branchInfo(e, node) {
+  setBranchInfo(e, node) {
     // const { data } = this.state;
     e.preventDefault();
     this.setState({
-      selectedNode: node, showingModal: true,
+      selectedNode: node,
     });
     // BranchMod.showModal();
   }
@@ -32,7 +32,7 @@ export default class EnhancedTree extends React.Component {
   addBranch(e, node) {
     const { data } = this.state;
 
-    e.preventDefault();
+    // e.preventDefault();
 
     const newBranch = prompt('Enter new branch:', 'Massaging a Jigglypuff');
     if (newBranch != null && newBranch !== '') {
@@ -61,7 +61,8 @@ export default class EnhancedTree extends React.Component {
   }
 
   changeMode() {
-    if (this.state.addMode) {
+    const { addMode } = this.state;
+    if (addMode) {
       this.setState({ addMode: false, buttonText: 'Add' });
     } else {
       this.setState({ addMode: true, buttonText: 'Remove' });
@@ -70,7 +71,7 @@ export default class EnhancedTree extends React.Component {
 
   render() {
     const {
-      data, height, width, svgProps, addMode, buttonText,
+      data, height, width, svgProps, addMode, buttonText, selectedNode,
     } = this.state;
 
     return (
@@ -83,7 +84,7 @@ export default class EnhancedTree extends React.Component {
           svgProps={svgProps}
           gProps={{
             className: 'node',
-            onClick: this.branchInfo,
+            onClick: this.setBranchInfo,
             // addMode ? this.addBranch : this.removeBranch,
           }}
         />
@@ -95,7 +96,11 @@ export default class EnhancedTree extends React.Component {
           {' '}
           mode
         </button>
-        <BranchMod curNode={this.state.selectedNode} />
+        <BranchMod
+          currentNode={selectedNode}
+          addBranch={this.addBranch}
+          removeBranch={this.removeBranch}
+        />
       </div>
     );
   }
