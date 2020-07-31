@@ -27,3 +27,11 @@ Screenshots of reworked navigation and the example trees:
 ![Iteration 1.1 screenshot](images/home-miditeration-1.png)
 
 ![Iteration 1.2 screenshot](images/profile-miditeration-1.png)
+
+### Charlie Beiser Contribution
+
+-Created BranchMod class, which contains menu for adding, removing and editing individual nodes/branches. 
+
+-Improved Enhancedtree class to enable compatability with BranchMod class. 
+
+-Connected add and remove branch functionality of EnhancedTree class into to BranchMod menu. 
