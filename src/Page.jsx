@@ -5,8 +5,6 @@ import {
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import IssueAddNavItem from './IssueAddNavItem.jsx';
-import Search from './Search.jsx';
 import UserContext from './UserContext.js';
 import graphQLFetch from './graphQLFetch.js';
 import store from './store.js';
@@ -30,13 +28,7 @@ function NavBar({ user, onUserChange }) {
           <NavItem>Sign Up</NavItem>
         </LinkContainer>
       </Nav>
-      <Col sm={5}>
-        <Navbar.Form>
-          <Search />
-        </Navbar.Form>
-      </Col>
       <Nav pullRight>
-        <IssueAddNavItem user={user} />
         <SignInNavItem user={user} onUserChange={onUserChange} />
         <NavDropdown
           id="user-dropdown"
