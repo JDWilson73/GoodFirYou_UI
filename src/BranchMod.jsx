@@ -24,7 +24,7 @@ export default class BranchMod extends React.Component {
       <Tooltip id="delete-tooltip" placement="top">Delete Branch</Tooltip>
     );
     const { currentNode, addBranch, removeBranch } = this.props;
-    // just to make arguments of addbranch work. 
+    // just to make arguments of addbranch work.
     const e = null;
 
     return (
