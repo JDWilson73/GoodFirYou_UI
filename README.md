@@ -26,4 +26,4 @@ Screenshots of reworked navigation and the example trees:
 
 ![Iteration 1.1 screenshot](images/home-miditeration-1.png)
 
-![Iteration 1.2 screenshot](images/profile-miditeration-2.png)
+![Iteration 1.2 screenshot](images/profile-miditeration-1.png)
