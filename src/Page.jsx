@@ -3,6 +3,7 @@ import {
   Navbar, Nav, NavItem, NavDropdown,
   MenuItem, Glyphicon, Grid, Col,
 } from 'react-bootstrap';
+
 import { LinkContainer } from 'react-router-bootstrap';
 
 import UserContext from './UserContext.js';
