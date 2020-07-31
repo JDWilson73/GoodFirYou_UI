@@ -11,12 +11,11 @@ export default class EnhancedTree extends React.Component {
       data, height, width, svgProps,
     } = this.props;
     this.state = {
-      data, height, width, svgProps, addMode: true, buttonText: 'Remove', selectedNode: 'unset',
+      data, height, width, svgProps, addMode: true, selectedNode: 'unset',
     };
 
     this.addBranch = this.addBranch.bind(this);
     this.removeBranch = this.removeBranch.bind(this);
-    this.changeMode = this.changeMode.bind(this);
     this.setBranchInfo = this.setBranchInfo.bind(this);
   }
 
@@ -26,7 +25,6 @@ export default class EnhancedTree extends React.Component {
     this.setState({
       selectedNode: node,
     });
-    // BranchMod.showModal();
   }
 
   addBranch(e, node) {
@@ -60,15 +58,6 @@ export default class EnhancedTree extends React.Component {
     this.setState({ data });
   }
 
-  changeMode() {
-    const { addMode } = this.state;
-    if (addMode) {
-      this.setState({ addMode: false, buttonText: 'Add' });
-    } else {
-      this.setState({ addMode: true, buttonText: 'Remove' });
-    }
-  }
-
   render() {
     const {
       data, height, width, svgProps, addMode, buttonText, selectedNode,
@@ -85,17 +74,8 @@ export default class EnhancedTree extends React.Component {
           gProps={{
             className: 'node',
             onClick: this.setBranchInfo,
-            // addMode ? this.addBranch : this.removeBranch,
           }}
         />
-
-        <button type="button" onClick={this.changeMode}>
-          Change to
-          {' '}
-          {buttonText}
-          {' '}
-          mode
-        </button>
         <BranchMod
           currentNode={selectedNode}
           addBranch={this.addBranch}

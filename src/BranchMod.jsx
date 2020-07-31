@@ -7,37 +7,11 @@ import {
 
 
 export default class BranchMod extends React.Component {
+  /*
   constructor(props) {
     super(props);
-
-    // this.state.currentNode = 'no node yet';
-
-    /*
-    this.state = {
-      showing: this.props.showing,
-    };
-    */
-
-    // set this to default to root of tree?
-
-    // this.showModal = this.showModal.bind(this);
-    // this.hideModal = this.hideModal.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    //this.setTreeNode = this.setTreeNode.bind(this);
-  }
-  /*
-  setTreeNode(node) {
-    this.props.currentNode = node;
   }
   */
-
-  // showModal() {
-  //  this.setState({ showing: true });
-  // }
-
-  // hideModal() {
-  //  this.setState({ showing: false });
-  // }
 
 
   render() {
@@ -87,15 +61,13 @@ export default class BranchMod extends React.Component {
           </OverlayTrigger>
         </Panel.Body>
         <Panel.Footer>
-          <Button variant="secondary" onClick={() => { console.log('adding!'); }}>
+          <Button variant="secondary" onClick={() => { console.log('doing a thing!'); }}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => { console.log('adding!'); }}>
+          <Button variant="primary" onClick={() => { console.log('doing a different thing!'); }}>
             Submit Changes
           </Button>
         </Panel.Footer>
-
-
       </Panel>
 
     );
