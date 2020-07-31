@@ -11,12 +11,22 @@ export default class EnhancedTree extends React.Component {
       data, height, width, svgProps,
     } = this.props;
     this.state = {
-      data, height, width, svgProps, addMode: true, buttonText: 'Remove',
+      data, height, width, svgProps, addMode: true, buttonText: 'Remove', selectedNode: 'unset',
     };
 
     this.addBranch = this.addBranch.bind(this);
     this.removeBranch = this.removeBranch.bind(this);
     this.changeMode = this.changeMode.bind(this);
+    this.branchInfo = this.branchInfo.bind(this);
+  }
+
+  branchInfo(e, node) {
+    // const { data } = this.state;
+    e.preventDefault();
+    this.setState({
+      selectedNode: node, showingModal: true,
+    });
+    // BranchMod.showModal();
   }
 
   addBranch(e, node) {
@@ -25,7 +35,7 @@ export default class EnhancedTree extends React.Component {
     e.preventDefault();
 
     const newBranch = prompt('Enter new branch:', 'Massaging a Jigglypuff');
-    if (newBranch != null && newBranch != '') {
+    if (newBranch != null && newBranch !== '') {
       const obj = findFirst(data, 'children', { name: node });
       if (!obj.children) {
         obj.children = [{
@@ -73,7 +83,8 @@ export default class EnhancedTree extends React.Component {
           svgProps={svgProps}
           gProps={{
             className: 'node',
-            onClick: addMode ? this.addBranch : this.removeBranch,
+            onClick: this.branchInfo,
+            // addMode ? this.addBranch : this.removeBranch,
           }}
         />
 
@@ -84,7 +95,7 @@ export default class EnhancedTree extends React.Component {
           {' '}
           mode
         </button>
-        <BranchMod />
+        <BranchMod curNode={this.state.selectedNode} />
       </div>
     );
   }
