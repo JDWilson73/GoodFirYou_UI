@@ -10,10 +10,9 @@ let userInfo = {
   curExp: 50,
 }
 
-let tree_ids = ['exercise', 'language', 'academics', 'coding'];
+let tree_ids = [experimentParsed, /*'exercise'*/, 'language', 'academics', 'coding'];
 
-let trees = {
-  'exercise': {
+let experiment = {'exercise': {
     name: 'TreeTrunk',
     textProps: {transform: 'rotate(90)'},
     children: [{
@@ -24,8 +23,24 @@ let trees = {
       name: 'EXAMPLE 2',
       textProps: {transform: 'rotate(90)'},
     }]
-  },
+  }};
 
+let experimentToJSONString = JSON.stringify(experiment);
+let experimentParsed = JSON.parse(experimentToJSONString);
+
+let trees = {
+  'exercise': {
+      name: 'TreeTrunk',
+      textProps: {transform: 'rotate(90)'},
+      children: [{
+        name: 'EXAMPLE 1',
+        textProps: {transform: 'rotate(90)'},
+      },
+      {
+        name: 'EXAMPLE 2',
+        textProps: {transform: 'rotate(90)'},
+      }]
+    },  
   'language': {
     name: 'SpoopTrunk',
     textProps: {transform: 'rotate(90)'},

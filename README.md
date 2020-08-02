@@ -30,8 +30,8 @@ Screenshots of reworked navigation and the example trees:
 
 ### Charlie Beiser Contribution
 
--Created BranchMod class, which contains menu for adding, removing and editing individual nodes/branches. 
+-Created BranchMod class, which contains menu for adding, removing and editing individual nodes/branches.
 
--Improved Enhancedtree class to enable compatability with BranchMod class. 
+-Improved Enhancedtree class to enable compatibility with BranchMod class. 
 
--Connected add and remove branch functionality of EnhancedTree class into to BranchMod menu. 
+-Connected add and remove branch functionality of EnhancedTree class into to BranchMod menu.

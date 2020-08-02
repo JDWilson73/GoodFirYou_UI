@@ -1,10 +1,33 @@
 import React from 'react';
 import Tree from 'react-tree-graph';
+import graphQLFetch from './graphQLFetch.js';
 import { findFirst, findAndDeleteFirst } from 'obj-traverse/lib/obj-traverse';
 
 import BranchMod from './BranchMod.jsx';
 
 export default class EnhancedTree extends React.Component {
+  static async fetchData(match, search, showError) {
+    const params = new URLSearchParams(search);
+    const vars = {};
+    vars.owner = params.get('owner');
+    vars.title = params.get('title');
+    const query = `query aBranch(
+      $owner: String!
+      $title: String
+    ) {
+      aBranch(
+        owner: $owner
+        title: $title
+      ) {
+        id title owner status created details tree
+      }
+    }
+  )`;
+
+  const dataFromDB = await graphQLFetch(query, vars, showError);
+  return dataFromDB;
+  }
+
   constructor(props) {
     super(props);
     const {
