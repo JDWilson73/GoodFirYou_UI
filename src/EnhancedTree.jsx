@@ -3,6 +3,7 @@ import Tree from 'react-tree-graph';
 import { findFirst, findAndDeleteFirst } from 'obj-traverse/lib/obj-traverse';
 
 import BranchMod from './BranchMod.jsx';
+import LevelModule from './LevelModule.jsx';
 
 export default class EnhancedTree extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ export default class EnhancedTree extends React.Component {
     this.addBranch = this.addBranch.bind(this);
     this.removeBranch = this.removeBranch.bind(this);
     this.setBranchInfo = this.setBranchInfo.bind(this);
+    this.markCompleted = this.markCompleted.bind(this);
   }
 
   setBranchInfo(e, node) {
@@ -32,14 +34,19 @@ export default class EnhancedTree extends React.Component {
     const newBranch = prompt('Enter new branch:', 'Massaging a Jigglypuff');
     if (newBranch != null && newBranch !== '') {
       const obj = findFirst(data, 'children', { name: node });
+      const randExp = Math.floor(Math.random() * 50) + 1;
       if (!obj.children) {
         obj.children = [{
           name: `${newBranch}`,
+          completed: false,
+          expValue: randExp,
           textProps: { transform: 'rotate(90)' },
         }];
       } else {
         obj.children.push({
           name: `${newBranch}`,
+          completed: false,
+          expValue: randExp,
           textProps: { transform: 'rotate(90)' },
         });
       }
@@ -51,6 +58,13 @@ export default class EnhancedTree extends React.Component {
     const { data } = this.props;
 
     findAndDeleteFirst(data, 'children', { name: node });
+
+    this.setState({ data });
+  }
+
+  markCompleted(e, node) {
+    const { data } = this.props;
+    findFirst(data, 'children', { name: node })['completed'] = true;
 
     this.setState({ data });
   }
@@ -77,6 +91,11 @@ export default class EnhancedTree extends React.Component {
           currentNode={selectedNode}
           addBranch={this.addBranch}
           removeBranch={this.removeBranch}
+          markCompleted={this.markCompleted}
+        />
+        <LevelModule
+          data={data}
+          selectedNode={selectedNode}
         />
       </div>
     );
