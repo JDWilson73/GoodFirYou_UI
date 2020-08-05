@@ -5,6 +5,10 @@ import { findFirst, findAndDeleteFirst } from 'obj-traverse/lib/obj-traverse';
 import BranchMod from './BranchMod.jsx';
 import LevelModule from './LevelModule.jsx';
 
+import './style.css';
+//import '../node_modules/react-tree-graph/styles/style.css';
+//import Styles from 'style-loader!css-loader?modules!../node_modules/react-tree-graph/dist/style.css';
+
 export default class EnhancedTree extends React.Component {
   constructor(props) {
     super(props);
