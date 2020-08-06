@@ -23,7 +23,7 @@ export default class BranchMod extends React.Component {
     const deleteTooltip = (
       <Tooltip id="delete-tooltip" placement="top">Delete Branch</Tooltip>
     );
-    const { currentNode, addBranch, removeBranch } = this.props;
+    const { currentNode, addBranch, removeBranch, markCompleted } = this.props;
     // just to make arguments of addbranch work.
     const e = null;
 
@@ -57,6 +57,12 @@ export default class BranchMod extends React.Component {
           <OverlayTrigger delayShow={1000} overlay={deleteTooltip}>
             <Button bsSize="small" onClick={() => { removeBranch(e, currentNode); }}>
               <Glyphicon glyph="trash" />
+            </Button>
+          </OverlayTrigger>
+          {' '}
+          <OverlayTrigger delayShow={1000} overlay={AddTooltip}>
+            <Button bsSize="small" onClick={() => { markCompleted(e, currentNode); }}>
+              <Glyphicon glyph="ok" />
             </Button>
           </OverlayTrigger>
         </Panel.Body>

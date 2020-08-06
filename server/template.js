@@ -6,8 +6,9 @@ export default function template(body, initialData, userData) {
 
   <head>
     <meta charset="utf-8">
-    <title>Pro MERN Stack</title>
+    <title>Good Fir You</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/bootstrap/css/style.css" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="https://apis.google.com/js/api:client.js"></script>
