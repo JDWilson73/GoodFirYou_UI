@@ -15,6 +15,78 @@
 	cursor: pointer;
 }
 
+.level {
+  margin-left: 10em;
+  margin-top: 10em;
+  margin-bottom: 20em;
+  border-style: double;
+  border-radius: 3em;
+  border-color: #266136;
+  text-align: center;
+  padding: 3em;
+  box-shadow: 2px 2px 8px #558555;
+}
+
+.flexbox {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexbox2 {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-left: 8em;
+}
+
+.userinfo {
+  margin-top: 4em;
+  margin-left: 4em;
+  border-style: double;
+  border-radius: 3em;
+  border-color: #266136;
+  text-align: center;
+  padding: 3em;
+  box-shadow: 2px 2px 8px #558555;
+}
+
+.navbar-default {
+  background-color: #295729;
+  border-color: white;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: white;
+}
+
+.panel-default>.panel-heading {
+  background-color: #295729;
+}
+
+.panel-footer {
+  background-color: #295729;
+}
+
+.panel-body {
+  background-color: #c6f7b0;
+}
+
+.modal-title {
+  color: white;
+}
+
+h1 {
+  text-shadow: 2px 2px 8px #558555;
+}
+
+button {
+  background-color: #4CAF50;
+  box-shadow: 2px 2px 8px #558555;
+}
+
 path.link {
 	fill: none;
 	stroke: #63470b;
@@ -22,8 +94,8 @@ path.link {
 }
 
 body {
-	background-color: white;
-	overflow: hidden;
+	background-color: #c6f7b0;
+	/*overflow: hidden;*/
 }
 /*
 span {

@@ -77,26 +77,33 @@ export default class EnhancedTree extends React.Component {
 
     return (
       <div className="custom-container">
-        <Tree
-          data={data}
-          height={height}
-          width={width}
-          svgProps={svgProps}
-          gProps={{
-            className: 'node',
-            onClick: this.setBranchInfo,
-          }}
-        />
+        <div className="flexbox">
+
+          <Tree
+            animated={true}
+            data={data}
+            height={height}
+            width={width}
+            svgProps={svgProps}
+            gProps={{
+              className: 'node',
+              onClick: this.setBranchInfo,
+            }}
+          />
+          <div className = "level">
+            <LevelModule
+              data={data}
+              selectedNode={selectedNode}
+            />
+          </div>
+        </div>
         <BranchMod
           currentNode={selectedNode}
           addBranch={this.addBranch}
           removeBranch={this.removeBranch}
           markCompleted={this.markCompleted}
         />
-        <LevelModule
-          data={data}
-          selectedNode={selectedNode}
-        />
+
       </div>
     );
   }
