@@ -20,7 +20,6 @@ export default class EnhancedTree extends React.Component {
   }
 
   setBranchInfo(e, node) {
-    // const { data } = this.state;
     e.preventDefault();
     this.setState({
       selectedNode: node,
@@ -29,8 +28,6 @@ export default class EnhancedTree extends React.Component {
 
   addBranch(e, node) {
     const { data } = this.props;
-
-    // e.preventDefault();
 
     const newBranch = prompt('Enter new branch:', 'Massaging a Jigglypuff');
     if (newBranch != null && newBranch !== '') {
@@ -60,8 +57,9 @@ export default class EnhancedTree extends React.Component {
 
   render() {
     const {
-      data, height, width, svgProps, addMode, buttonText, selectedNode,
+      height, width, svgProps, addMode, buttonText, selectedNode,
     } = this.state;
+    const { data } = this.props;
 
     return (
       <div className="custom-container">

@@ -35,3 +35,13 @@ Screenshots of reworked navigation and the example trees:
 -Improved Enhancedtree class to enable compatability with BranchMod class. 
 
 -Connected add and remove branch functionality of EnhancedTree class into to BranchMod menu. 
+
+### Joseph (Dayton) Wilson Contribution
+
+-Created EnhancedTree class as a wrapper for our base Tree that allowed us to make branch-specific actions such as addition and removal of nodes.
+
+-Created Sign Up page.
+
+-Created Profile page with functionality for switching among a selection of different trees (performed by selecting the tree name from a dropdown and clicking the switch button).
+
+-Cleaned up the code by removing all now-unnecessary issue-related files from the project.
