@@ -7,6 +7,33 @@ Group Members: Charlie Beiser, Steve Swanton, Joseph 'Dayton' Wilson
 react-tree-graph is being used for creating a React-based tree
 see: reactjsexample.com/a-react-library-for-generating-a-tree-graph-from-data-using-d3/
 
+## Iteration 2
+
+### Joseph (Dayton) Wilson Contribution
+
+- Built out profile features including experience, leveling
+
+- CSS champion. Managed to sort out why CSS would not load and then via custom CSS updated the webapp to better capture the theme of Good Fir You.
+
+
+### Charlie Beiser Contribution
+
+- Heroku deployment czar
+
+- Set up remote database for future use
+
+
+### Steve Swanton Contribution
+
+Largely unsuccessful iteration on my part with failures to properly fetch & send data to the database.
+
+- Reworked GraphQL and tested via Playground to confirm that individual 'trees' could be passed as a single object
+
+- Attempted to update EnhancedTree, LandingPage and related files to allow for accessing & updating the database so we could remove our hardcoded examples, but even with TA help was unable to resolve my issues before the deadline.
+
+- Looking forward the database connections will be priority number 1 so that the functionality implemented by teammates can be persistent and dynamic.
+
+---
 
 ## Iteration 1
 
