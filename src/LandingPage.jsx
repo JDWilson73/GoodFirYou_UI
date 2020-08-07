@@ -2,7 +2,7 @@ import React from 'react';
 import EnhancedTree from './EnhancedTree.jsx';
 // import 'react-tree-graph/dist/style.css';
 
-let data = {
+let dataTest = {
   name: 'TreeTrunk',
   textProps: {transform: 'rotate(90)'},
   children: [{
@@ -33,7 +33,8 @@ let data = {
     textProps: {transform: 'rotate(90)'},
   }]
 };
-
+let testJSON = JSON.stringify(dataTest);
+let data = JSON.parse(testJSON);
 
 export default function LandingPage() {
   return (
