@@ -10,7 +10,7 @@ let userInfo = {
   curExp: 50,
 }
 
-let tree_ids = [experimentParsed, /*'exercise'*/, 'language', 'academics', 'coding'];
+let tree_ids = ['exercise', 'language', 'academics', 'coding'];
 
 let experiment = {'exercise': {
     name: 'TreeTrunk',
@@ -46,7 +46,7 @@ let trees = {
         name: 'EXAMPLE 2',
         textProps: {transform: 'rotate(90)'},
       }]
-    },  
+    },
   'language': {
     name: 'SpoopTrunk',
     textProps: {transform: 'rotate(90)'},
