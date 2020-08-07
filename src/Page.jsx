@@ -25,7 +25,7 @@ function NavBar({ user, onUserChange }) {
         <LinkContainer to="/profile">
           <NavItem>Profile</NavItem>
         </LinkContainer>
-        <LinkContainer to="/login">
+        <LinkContainer to="/logIn">
           <NavItem>Sign Up</NavItem>
         </LinkContainer>
       </Nav>
