@@ -412,7 +412,8 @@ var BranchMod = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           currentNode = _this$props.currentNode,
           addBranch = _this$props.addBranch,
-          removeBranch = _this$props.removeBranch; // just to make arguments of addbranch work.
+          removeBranch = _this$props.removeBranch,
+          markCompleted = _this$props.markCompleted; // just to make arguments of addbranch work.
 
       var e = null;
       return (
@@ -450,6 +451,16 @@ var BranchMod = /*#__PURE__*/function (_React$Component) {
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Glyphicon"], {
           glyph: "trash"
+        }))), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["OverlayTrigger"], {
+          delayShow: 1000,
+          overlay: AddTooltip
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+          bsSize: "small",
+          onClick: function onClick() {
+            markCompleted(e, currentNode);
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Glyphicon"], {
+          glyph: "ok"
         })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Panel"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
           variant: "secondary",
           onClick: function onClick() {
@@ -538,10 +549,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_tree_graph__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-tree-graph */ "./node_modules/react-tree-graph/dist/index.js");
 /* harmony import */ var react_tree_graph__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_tree_graph__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! obj-traverse/lib/obj-traverse */ "./node_modules/obj-traverse/lib/obj-traverse.js");
-/* harmony import */ var obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _BranchMod_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./BranchMod.jsx */ "./src/BranchMod.jsx");
+/* harmony import */ var _graphQLFetch_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./graphQLFetch.js */ "./src/graphQLFetch.js");
+/* harmony import */ var obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! obj-traverse/lib/obj-traverse */ "./node_modules/obj-traverse/lib/obj-traverse.js");
+/* harmony import */ var obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _BranchMod_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./BranchMod.jsx */ "./src/BranchMod.jsx");
+/* harmony import */ var _LevelModule_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LevelModule.jsx */ "./src/LevelModule.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -568,10 +585,49 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var EnhancedTree = /*#__PURE__*/function (_React$Component) {
   _inherits(EnhancedTree, _React$Component);
 
   var _super = _createSuper(EnhancedTree);
+
+  _createClass(EnhancedTree, null, [{
+    key: "fetchData",
+    value: function () {
+      var _fetchData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(match, search, showError) {
+        var params, vars, query, dataFromDB;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                params = new URLSearchParams(search);
+                vars = {};
+                vars.owner = params.get('owner');
+                vars.title = params.get('title');
+                query = "query aBranch(\n      $owner: String!\n      $title: String\n    ) {\n      aBranch(\n        owner: $owner\n        title: $title\n      ) {\n        id title owner status created details tree\n      }\n    }\n  )";
+                _context.next = 7;
+                return Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_2__["default"])(query, vars, showError);
+
+              case 7:
+                dataFromDB = _context.sent;
+                return _context.abrupt("return", dataFromDB);
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function fetchData(_x, _x2, _x3) {
+        return _fetchData.apply(this, arguments);
+      }
+
+      return fetchData;
+    }()
+  }]);
 
   function EnhancedTree(props) {
     var _this;
@@ -595,13 +651,13 @@ var EnhancedTree = /*#__PURE__*/function (_React$Component) {
     _this.addBranch = _this.addBranch.bind(_assertThisInitialized(_this));
     _this.removeBranch = _this.removeBranch.bind(_assertThisInitialized(_this));
     _this.setBranchInfo = _this.setBranchInfo.bind(_assertThisInitialized(_this));
+    _this.markCompleted = _this.markCompleted.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(EnhancedTree, [{
     key: "setBranchInfo",
     value: function setBranchInfo(e, node) {
-      // const { data } = this.state;
       e.preventDefault();
       this.setState({
         selectedNode: node
@@ -610,18 +666,20 @@ var EnhancedTree = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "addBranch",
     value: function addBranch(e, node) {
-      var data = this.props.data; // e.preventDefault();
-
+      var data = this.props.data;
       var newBranch = prompt('Enter new branch:', 'Massaging a Jigglypuff');
 
       if (newBranch != null && newBranch !== '') {
-        var obj = Object(obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_2__["findFirst"])(data, 'children', {
+        var obj = Object(obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_3__["findFirst"])(data, 'children', {
           name: node
         });
+        var randExp = Math.floor(Math.random() * 50) + 1;
 
         if (!obj.children) {
           obj.children = [{
             name: "".concat(newBranch),
+            completed: false,
+            expValue: randExp,
             textProps: {
               transform: 'rotate(90)'
             }
@@ -629,6 +687,8 @@ var EnhancedTree = /*#__PURE__*/function (_React$Component) {
         } else {
           obj.children.push({
             name: "".concat(newBranch),
+            completed: false,
+            expValue: randExp,
             textProps: {
               transform: 'rotate(90)'
             }
@@ -644,9 +704,20 @@ var EnhancedTree = /*#__PURE__*/function (_React$Component) {
     key: "removeBranch",
     value: function removeBranch(e, node) {
       var data = this.props.data;
-      Object(obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_2__["findAndDeleteFirst"])(data, 'children', {
+      Object(obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_3__["findAndDeleteFirst"])(data, 'children', {
         name: node
       });
+      this.setState({
+        data: data
+      });
+    }
+  }, {
+    key: "markCompleted",
+    value: function markCompleted(e, node) {
+      var data = this.props.data;
+      Object(obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_3__["findFirst"])(data, 'children', {
+        name: node
+      })['completed'] = true;
       this.setState({
         data: data
       });
@@ -655,16 +726,19 @@ var EnhancedTree = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var _this$state = this.state,
-          data = _this$state.data,
           height = _this$state.height,
           width = _this$state.width,
           svgProps = _this$state.svgProps,
           addMode = _this$state.addMode,
           buttonText = _this$state.buttonText,
           selectedNode = _this$state.selectedNode;
+      var data = this.props.data;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "custom-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flexbox"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tree_graph__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        animated: true,
         data: data,
         height: height,
         width: width,
@@ -673,10 +747,16 @@ var EnhancedTree = /*#__PURE__*/function (_React$Component) {
           className: 'node',
           onClick: this.setBranchInfo
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BranchMod_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "level"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LevelModule_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        data: data,
+        selectedNode: selectedNode
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BranchMod_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
         currentNode: selectedNode,
         addBranch: this.addBranch,
-        removeBranch: this.removeBranch
+        removeBranch: this.removeBranch,
+        markCompleted: this.markCompleted
       }));
     }
   }]);
@@ -704,7 +784,7 @@ __webpack_require__.r(__webpack_exports__);
 
  // import 'react-tree-graph/dist/style.css';
 
-var data = {
+var dataTest = {
   name: 'TreeTrunk',
   textProps: {
     transform: 'rotate(90)'
@@ -754,6 +834,8 @@ var data = {
     }
   }]
 };
+var testJSON = JSON.stringify(dataTest);
+var data = JSON.parse(testJSON);
 function LandingPage() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EnhancedTree_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
     data: data,
@@ -765,6 +847,108 @@ function LandingPage() {
     }
   });
 }
+
+/***/ }),
+
+/***/ "./src/LevelModule.jsx":
+/*!*****************************!*\
+  !*** ./src/LevelModule.jsx ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LevelModule; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! obj-traverse/lib/obj-traverse */ "./node_modules/obj-traverse/lib/obj-traverse.js");
+/* harmony import */ var obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var LevelModule = /*#__PURE__*/function (_React$Component) {
+  _inherits(LevelModule, _React$Component);
+
+  var _super = _createSuper(LevelModule);
+
+  function LevelModule() {
+    var _this;
+
+    _classCallCheck(this, LevelModule);
+
+    _this = _super.call(this);
+    _this.totalExp = _this.totalExp.bind(_assertThisInitialized(_this));
+    _this.expToNextLevel = _this.expToNextLevel.bind(_assertThisInitialized(_this));
+    _this.currentLevel = _this.currentLevel.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(LevelModule, [{
+    key: "totalExp",
+    value: function totalExp() {
+      var data = this.props.data;
+      var totalExp = 0;
+      var completed = Object(obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_1__["findAll"])(data, 'children', {
+        'completed': true
+      });
+      completed.forEach(function (item) {
+        totalExp += item['expValue'];
+      });
+      return totalExp;
+    }
+  }, {
+    key: "expToNextLevel",
+    value: function expToNextLevel() {
+      return 100;
+    }
+  }, {
+    key: "currentLevel",
+    value: function currentLevel(totalExp) {
+      return Math.floor(totalExp / this.expToNextLevel()) + 1;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          data = _this$props.data,
+          selectedNode = _this$props.selectedNode;
+      var totalExp = this.totalExp();
+      var find = Object(obj_traverse_lib_obj_traverse__WEBPACK_IMPORTED_MODULE_1__["findFirst"])(data, 'children', {
+        name: selectedNode
+      });
+      var nodeCompleted = find['completed'];
+      var expValue = find['expValue'];
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Node completed: ", nodeCompleted !== undefined ? nodeCompleted.toString() : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Node exp value: ", expValue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Calculated total exp: ", totalExp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Current level: ", this.currentLevel(totalExp)));
+    }
+  }]);
+
+  return LevelModule;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
 
 /***/ }),
 
@@ -1150,6 +1334,33 @@ var userInfo = {
   curExp: 50
 };
 var tree_ids = ['exercise', 'language', 'academics', 'coding'];
+var experiment = {
+  'exercise': {
+    name: 'TreeTrunk',
+    completed: true,
+    expValue: 10,
+    textProps: {
+      transform: 'rotate(90)'
+    },
+    children: [{
+      name: 'EXAMPLE 1',
+      completed: false,
+      expValue: 10,
+      textProps: {
+        transform: 'rotate(90)'
+      }
+    }, {
+      name: 'EXAMPLE 2',
+      completed: true,
+      expValue: 10,
+      textProps: {
+        transform: 'rotate(90)'
+      }
+    }]
+  }
+};
+var experimentToJSONString = JSON.stringify(experiment);
+var experimentParsed = JSON.parse(experimentToJSONString);
 var trees = {
   'exercise': {
     name: 'TreeTrunk',
@@ -1261,15 +1472,13 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
         className: "custom-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "usertreeview"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Personal Growth"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EnhancedTree_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        data: this.state.data,
-        height: 600,
-        width: 600,
-        svgProps: {
-          className: 'custom',
-          transform: 'rotate(270)'
-        }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Username: ", name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Level: ", level), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Number of trees: ", numTrees), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Current Exp: ", curExp, " / 100")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flexbox"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Personal Growth"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flexbox2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "userinfo"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Username: ", name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Level: ", level), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Number of trees: ", numTrees)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: this.switchTree
       }, "Switch Tree"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_widgets__WEBPACK_IMPORTED_MODULE_3__["Combobox"], {
@@ -1278,6 +1487,14 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
           _this2.setState({
             tree: value
           });
+        }
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EnhancedTree_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        data: this.state.data,
+        height: 600,
+        width: 600,
+        svgProps: {
+          className: 'custom',
+          transform: 'rotate(270)'
         }
       }));
     }
