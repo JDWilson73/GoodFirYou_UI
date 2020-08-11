@@ -39,7 +39,8 @@ if (apiProxyTarget) {
 }
 
 if (!process.env.UI_API_ENDPOINT) {
-  process.env.UI_API_ENDPOINT = 'http://localhost:3000/graphql';
+  process.env.UI_API_ENDPOINT = 'https://good-fir-you-api.herokuapp.com/3000';
+  //'http://localhost:3000/graphql';
 }
 
 if (!process.env.UI_SERVER_API_ENDPOINT) {
@@ -47,7 +48,8 @@ if (!process.env.UI_SERVER_API_ENDPOINT) {
 }
 
 if (!process.env.UI_AUTH_ENDPOINT) {
-  process.env.UI_AUTH_ENDPOINT = 'http://localhost:3000/auth';
+  process.env.UI_AUTH_ENDPOINT = 'https://good-fir-you-ui.herokuapp.com/3000/auth';
+  //'http://localhost:3000/auth';
 }
 
 app.get('/env.js', (req, res) => {

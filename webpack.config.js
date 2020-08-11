@@ -4,16 +4,15 @@ const webpack = require('webpack');
 
 const browserConfig = {
   mode: 'development',
-  entry: {
-    app: ['./browser/App.jsx']
-  },
+  entry: { app: ['./browser/App.jsx'] },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'public'),
     publicPath: '/',
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
@@ -34,14 +33,6 @@ const browserConfig = {
           },
         },
       },
-      {   test: /\.css$/,   loader: 'style-loader' }, {   test: /\.css$/,   loader: 'css-loader',   query: {     modules: true,     localIdentName: '[name]__[local]___[hash:base64:5]'   } } ,
-      {
-        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-        },
-      },
     ],
   },
   optimization: {
@@ -60,9 +51,7 @@ const browserConfig = {
 
 const serverConfig = {
   mode: 'development',
-  entry: {
-    server: ['./server/uiserver.js']
-  },
+  entry: { server: ['./server/uiserver.js'] },
   target: 'node',
   externals: [nodeExternals()],
   output: {
@@ -71,22 +60,22 @@ const serverConfig = {
     publicPath: '/',
   },
   module: {
-    rules: [{
-      test: /\.jsx?$/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            ['@babel/preset-env', {
-              targets: {
-                node: '10'
-              },
-            }],
-            '@babel/preset-react',
-          ],
+    rules: [
+      {
+        test: /\.jsx?$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', {
+                targets: { node: '10' },
+              }],
+              '@babel/preset-react',
+            ],
+          },
         },
       },
-    },],
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -96,17 +85,4 @@ const serverConfig = {
   devtool: 'source-map',
 };
 
-/*const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-module.exports = {
-  plugins: [new MiniCssExtractPlugin()],
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
-    ],browserConfig, serverConfig,
-  },
-};*/
 module.exports = [browserConfig, serverConfig];

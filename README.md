@@ -20,7 +20,9 @@ see: reactjsexample.com/a-react-library-for-generating-a-tree-graph-from-data-us
 
 - Heroku deployment czar
 
-- Set up remote database for future use
+- Set up remote database for future use, connected and initialized it. 
+
+- Bug fixes on UI. 
 
 
 ### Steve Swanton Contribution

@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Navbar, Nav, NavItem, NavDropdown,
-  MenuItem, Glyphicon, Grid, Col,
+  MenuItem, Glyphicon, Grid,
 } from 'react-bootstrap';
 
 import { LinkContainer } from 'react-router-bootstrap';
@@ -25,7 +25,7 @@ function NavBar({ user, onUserChange }) {
         <LinkContainer to="/profile">
           <NavItem>Profile</NavItem>
         </LinkContainer>
-        <LinkContainer to="/login">
+        <LinkContainer to="/logIn">
           <NavItem>Sign Up</NavItem>
         </LinkContainer>
       </Nav>
@@ -55,7 +55,7 @@ function Footer() {
         <a href="https://github.ccs.neu.edu/NEU-CS5610-SU20/GroupProject_GoodFirYou_UI">
           Github UI repository
         </a>
-        <br></br>
+        <br />
         <a href="https://github.ccs.neu.edu/NEU-CS5610-SU20/GroupProject_GoodFirYou_API">
           Github API repository
         </a>

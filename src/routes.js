@@ -1,5 +1,5 @@
 import LandingPage from './LandingPage.jsx';
-import LoginPage from './Login.jsx';
+import LoginPage from './LogIn.jsx';
 import ProfileSetupPage from './ProfileSetup.jsx';
 import ProfilePage from './Profile.jsx';
 import BranchZoomPage from './BranchZoom.jsx';
