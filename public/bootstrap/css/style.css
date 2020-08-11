@@ -38,6 +38,27 @@
   padding-left: 8em;
 }
 
+@media only screen and (max-width: 600px) {
+  .flexbox {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flexbox2 {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0em;
+  }
+
+  div {
+    zoom: 80%;
+  }
+
+  svg {
+    align-self: center;
+  }
+}
+
 .userinfo {
   margin-top: 4em;
   margin-left: 4em;
@@ -95,12 +116,4 @@ path.link {
 
 body {
 	background-color: #c6f7b0;
-	/*overflow: hidden;*/
 }
-/*
-span {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: #F4F4F4;
-	text-shadow: 0 1px 4px black;
-	float: right;
-}*/

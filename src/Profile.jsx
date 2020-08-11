@@ -5,7 +5,6 @@ import { Combobox } from 'react-widgets';
 
 let userInfo = {
   name: 'Namey McNamerson',
-  level: 5,
   numTrees: 4,
   curExp: 50,
 }
