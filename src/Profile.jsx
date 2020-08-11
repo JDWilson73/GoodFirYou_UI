@@ -38,12 +38,18 @@ let trees = {
   'exercise': {
       name: 'TreeTrunk',
       textProps: {transform: 'rotate(90)'},
+      completed: true,
+      expValue: 10,
       children: [{
         name: 'EXAMPLE 1',
+        completed: false,
+        expValue: 10,
         textProps: {transform: 'rotate(90)'},
       },
       {
         name: 'EXAMPLE 2',
+        completed: true,
+        expValue: 10,
         textProps: {transform: 'rotate(90)'},
       }]
     },

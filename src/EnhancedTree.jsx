@@ -1,7 +1,7 @@
 import React from 'react';
 import Tree from 'react-tree-graph';
 import graphQLFetch from './graphQLFetch.js';
-import { findFirst, findAndDeleteFirst } from 'obj-traverse/lib/obj-traverse';
+import { findFirst, findAndDeleteFirst, findAndModifyFirst } from 'obj-traverse/lib/obj-traverse';
 
 import BranchMod from './BranchMod.jsx';
 import LevelModule from './LevelModule.jsx';
@@ -42,6 +42,8 @@ export default class EnhancedTree extends React.Component {
     this.removeBranch = this.removeBranch.bind(this);
     this.setBranchInfo = this.setBranchInfo.bind(this);
     this.markCompleted = this.markCompleted.bind(this);
+    this.zoom = this.zoom.bind(this);
+    this.resetZoom = this.resetZoom.bind(this);
   }
 
   setBranchInfo(e, node) {
@@ -52,7 +54,7 @@ export default class EnhancedTree extends React.Component {
   }
 
   addBranch(e, node) {
-    const { data } = this.props;
+    const { data } = this.state;
 
     const newBranch = prompt('Enter new branch:', 'Massaging a Jigglypuff');
     if (newBranch != null && newBranch !== '') {
@@ -78,7 +80,7 @@ export default class EnhancedTree extends React.Component {
   }
 
   removeBranch(e, node) {
-    const { data } = this.props;
+    const { data } = this.state;
 
     findAndDeleteFirst(data, 'children', { name: node });
 
@@ -86,17 +88,32 @@ export default class EnhancedTree extends React.Component {
   }
 
   markCompleted(e, node) {
-    const { data } = this.props;
+    const { data } = this.state;
     findFirst(data, 'children', { name: node })['completed'] = true;
 
     this.setState({ data });
+  }
+
+  zoom(e, node) {
+    const { data } = this.state;
+    e.preventDefault();
+    const obj = findFirst(data, 'children', { name: node });
+    this.setState({ data: obj, tempRoot: node });
+  }
+
+  resetZoom() {
+    const { tempRoot } = this.state;
+    if (tempRoot) {
+      findAndModifyFirst(this.props.data, 'children', { name: tempRoot }, this.state.data);
+      this.setState({ data: this.props.data, tempRoot: undefined });
+    }
   }
 
   render() {
     const {
       height, width, svgProps, addMode, buttonText, selectedNode,
     } = this.state;
-    const { data } = this.props;
+    const { data } = this.state;
 
     return (
       <div className="custom-container">
@@ -111,8 +128,10 @@ export default class EnhancedTree extends React.Component {
             gProps={{
               className: 'node',
               onClick: this.setBranchInfo,
+              onContextMenu: this.zoom,
             }}
           />
+          <button type="button" onClick={this.resetZoom}>Reset Zoom</button>
           <div className = "level">
             <LevelModule
               data={data}
