@@ -35,7 +35,7 @@ export default class EnhancedTree extends React.Component {
       data, height, width, svgProps,
     } = this.props;
     this.state = {
-      data, height, width, svgProps, addMode: true, selectedNode: 'unset',
+      data, height, width, svgProps, addMode: true, selectedNode: 'click to select',
     };
 
     this.addBranch = this.addBranch.bind(this);
