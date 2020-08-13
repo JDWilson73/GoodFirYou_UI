@@ -7,12 +7,28 @@ import {
 
 
 export default class BranchMod extends React.Component {
-  /*
   constructor(props) {
     super(props);
-  }
-  */
+    this.state = {
+      currentUserID: '001',
+    };
 
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  handleSubmit(event) {
+
+    const { currentUserID } = this.state;
+    // this.setState({ currentUserID });
+    console.log(`User ID: ${currentUserID}`);
+    event.preventDefault();
+  }
+
+  handleChange(event) {
+    this.setState({ currentUserID: event.target.value });
+  }
 
   render() {
     // const { showing } = this.state;
@@ -23,31 +39,26 @@ export default class BranchMod extends React.Component {
     const deleteTooltip = (
       <Tooltip id="delete-tooltip" placement="top">Delete Branch</Tooltip>
     );
-    const { currentNode, addBranch, removeBranch, markCompleted } = this.props;
-    // just to make arguments of addbranch work.
+    const {
+      currentNode, addBranch, removeBranch,
+    } = this.props;
+    // To make arguments of addbranch work.
     const e = null;
 
     return (
       // <Panel show={showing} onHide={this.hideModal}>
       <Panel>
         <Panel.Heading closeButton>
-          <Modal.Title>Edit Node</Modal.Title>
+          <Modal.Title>Edit Branch</Modal.Title>
         </Panel.Heading>
         <Panel.Body>
-          <Form inline name="Edit" onSubmit={this.handleSubmit}>
-            <FormGroup>
-              <ControlLabel>
-                Current Name:
-                {' '}
-                {currentNode}
-                :
-              </ControlLabel>
-              {' '}
-              <FormControl type="text" name="owner" />
-            </FormGroup>
+          <ControlLabel>
+            Selected Branch:
+            {' '}
+            {currentNode}
+            :
+          </ControlLabel>
 
-            <Button bsStyle="primary" type="submit">Edit</Button>
-          </Form>
           <OverlayTrigger delayShow={1000} overlay={AddTooltip}>
             <Button bsSize="small" onClick={() => { addBranch(e, currentNode); }}>
               <Glyphicon glyph="plus" />
@@ -60,19 +71,33 @@ export default class BranchMod extends React.Component {
             </Button>
           </OverlayTrigger>
           {' '}
-          <OverlayTrigger delayShow={1000} overlay={AddTooltip}>
+          <Form inline name="Edit" onSubmit={this.handleSubmit}>
+            <FormGroup>
+
+              {' '}
+              <input
+                type="text"
+                value={this.state.value}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+
+            <Button bsStyle="primary" type="submit">Set User ID</Button>
+          </Form>
+
+          {/* <OverlayTrigger delayShow={1000} overlay={AddTooltip}>
             <Button bsSize="small" onClick={() => { markCompleted(e, currentNode); }}>
               <Glyphicon glyph="ok" />
             </Button>
-          </OverlayTrigger>
+    </OverlayTrigger> */}
         </Panel.Body>
         <Panel.Footer>
-          <Button variant="secondary" onClick={() => { console.log('doing a thing!'); }}>
+          {/* <Button variant="secondary" onClick={() => { console.log('doing a thing!'); }}>
             Close
           </Button>
           <Button variant="primary" onClick={() => { console.log('doing a different thing!'); }}>
             Submit Changes
-          </Button>
+    </Button> */}
         </Panel.Footer>
       </Panel>
 
