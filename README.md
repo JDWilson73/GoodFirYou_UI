@@ -23,7 +23,9 @@ see: reactjsexample.com/a-react-library-for-generating-a-tree-graph-from-data-us
 
 - Helped sort out config inconsistencies and resolve webpack problems
 
-- Assisted in trying to resolve Database connection problems
+- Assisted in trying to resolve Database connection problems.
+
+- Added placeholder user functionality to BranchMod, which was unused.
 
 ### Steve Swanton Contribution
 
