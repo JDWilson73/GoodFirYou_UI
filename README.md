@@ -1,5 +1,7 @@
 # GroupProject_GoodFirYou_UI
 
+Live site: http://good-fir-you-ui.herokuapp.com/home
+
 
 Group Members: Charlie Beiser, Steve Swanton, Joseph 'Dayton' Wilson
 
