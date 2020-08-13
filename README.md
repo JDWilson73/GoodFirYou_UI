@@ -1,5 +1,7 @@
 # GroupProject_GoodFirYou_UI
 
+Live site: http://good-fir-you-ui.herokuapp.com/home
+
 
 Group Members: Charlie Beiser, Steve Swanton, Joseph 'Dayton' Wilson
 
@@ -17,10 +19,15 @@ see: reactjsexample.com/a-react-library-for-generating-a-tree-graph-from-data-us
 
 ### Charlie Beiser Contribution
 
+- Continued spearheading deployment to heroku
+
+- Helped sort out config inconsistencies and resolve webpack problems
+
+- Assisted in trying to resolve Database connection problems
 
 ### Steve Swanton Contribution
 
-
+- Continued trying to resolve DB connection issues. Spent time with multiple TAs and over the course of several piazza posts with Prof Mullen was able to get the LandingPage to successfully acquire its data from our database. Solution was only found 6 hours before the deadline so a total reworking of the webapp was not tenable. All attempted revisions and updates to make the rest of the site dynamic have been pushed to the 'tooLittleTooLate' branch in both the API and UI repos.
 ---
 
 ## Iteration 2
