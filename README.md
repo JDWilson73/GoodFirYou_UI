@@ -7,6 +7,22 @@ Group Members: Charlie Beiser, Steve Swanton, Joseph 'Dayton' Wilson
 react-tree-graph is being used for creating a React-based tree
 see: reactjsexample.com/a-react-library-for-generating-a-tree-graph-from-data-using-d3/
 
+## Iteration 3
+
+### Joseph (Dayton) Wilson Contribution
+
+- Added zoom and reset zoom functionality for tree branches
+
+- Fixed the CSS to make the mobile view much better looking/more usable
+
+### Charlie Beiser Contribution
+
+
+### Steve Swanton Contribution
+
+
+---
+
 ## Iteration 2
 
 ### Joseph (Dayton) Wilson Contribution
