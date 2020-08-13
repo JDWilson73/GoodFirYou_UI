@@ -40,7 +40,7 @@ export default class BranchMod extends React.Component {
       <Tooltip id="delete-tooltip" placement="top">Delete Branch</Tooltip>
     );
     const {
-      currentNode, addBranch, removeBranch,
+      currentNode, addBranch, removeBranch, markCompleted, 
     } = this.props;
     // To make arguments of addbranch work.
     const e = null;
@@ -71,6 +71,11 @@ export default class BranchMod extends React.Component {
             </Button>
           </OverlayTrigger>
           {' '}
+          <OverlayTrigger delayShow={1000} overlay={AddTooltip}>
+            <Button bsSize="small" onClick={() => { markCompleted(e, currentNode); }}>
+              <Glyphicon glyph="ok" />
+            </Button>
+          </OverlayTrigger>
           <Form inline name="Edit" onSubmit={this.handleSubmit}>
             <FormGroup>
 
@@ -84,12 +89,6 @@ export default class BranchMod extends React.Component {
 
             <Button bsStyle="primary" type="submit">Set User ID</Button>
           </Form>
-
-          {/* <OverlayTrigger delayShow={1000} overlay={AddTooltip}>
-            <Button bsSize="small" onClick={() => { markCompleted(e, currentNode); }}>
-              <Glyphicon glyph="ok" />
-            </Button>
-    </OverlayTrigger> */}
         </Panel.Body>
         <Panel.Footer>
           {/* <Button variant="secondary" onClick={() => { console.log('doing a thing!'); }}>
